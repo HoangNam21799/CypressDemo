@@ -31,7 +31,7 @@ jobs:
           npx mochawesome-report-generator cypress/reports/mochawesome.json -o cypress/reports/html
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@67c488fabae6c2f2104aabb34f24a426d89df99e
         with:
           name: cypress-results
           path: cypress/videos
