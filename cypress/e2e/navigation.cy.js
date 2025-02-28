@@ -1,11 +1,11 @@
-import AFWComponent from "../page/components/afw.component";
-import BookStoreApplicationComponent from "../page/components/book-store-application.component";
-import ElementsComponent from "../page/components/elements.component";
-import FormsComponent from "../page/components/forms.component";
-import InteractionsComponent from "../page/components/interactions.component";
-import SideMenu from "../page/components/side-menu.component";
-import TextBoxComponent from "../page/components/textbox.component";
-import WidgetsComponent from "../page/components/widgets.component";
+import AFWComponent from "../page/components/afw/afw.component";
+import BookStoreApplicationComponent from "../page/components/book-store-application/book-store-application.component";
+import ElementsComponent from "../page/components/elements/elements.component";
+import FormsComponent from "../page/components/forms/forms.component";
+import InteractionsComponent from "../page/components/interactions/interactions.component";
+import SideMenu from "../page/components/side-menu/side-menu.component";
+import TextboxComponent from "../page/components/elements/textbox.component";
+import WidgetsComponent from "../page/components/widgets/widgets.component";
 import HomePage from "../page/home-page";
 
 Cypress.on('uncaught:exception', (err, runnable) => {
@@ -21,7 +21,7 @@ const interactionsComponent = InteractionsComponent.getInstance();
 const bookStoreApplicationComponent = BookStoreApplicationComponent.getInstance();
 
 const sideMenu = SideMenu.getInstance();
-const textBoxComponent = TextBoxComponent.getInstance();
+const textBoxComponent = TextboxComponent.getInstance();
 
 describe("", () => {
 
@@ -31,6 +31,8 @@ describe("", () => {
                 req.reply({ body: "" });
             }
         }).as("blockGoogleRequests");
+
+        cy.viewport(1920, 1080);
     });
 
 
@@ -123,19 +125,21 @@ describe("", () => {
             });
 
         sideMenu.isVisible()
-            .click("textBox");
-
-        textBoxComponent.isVisible()
-            .assertThat(() => {
-                textBoxComponent.fullNameLabel().should("be.visible");
-                textBoxComponent.fullNameInput().should("be.enabled");
-                textBoxComponent.emailLabel().should("be.visible");
-                textBoxComponent.emailInput().should("be.enabled");
-                textBoxComponent.currentAddressLabel().should("be.visible");
-                textBoxComponent.currentAddressTextarea().should("be.enabled");
-                textBoxComponent.permanentAddressLabel().should("be.visible");
-                textBoxComponent.permanentAddressTextarea().should("be.enabled");
+            .click("textBox")
+            .waitUntil(() => {
+                textBoxComponent.isVisible();
             });
+
+        textBoxComponent.assertThat(() => {
+            textBoxComponent.fullNameLabel().should("be.visible");
+            textBoxComponent.fullNameInput().should("be.enabled");
+            textBoxComponent.emailLabel().should("be.visible");
+            textBoxComponent.emailInput().should("be.enabled");
+            textBoxComponent.currentAddressLabel().should("be.visible");
+            textBoxComponent.currentAddressTextarea().should("be.enabled");
+            textBoxComponent.permanentAddressLabel().should("be.visible");
+            textBoxComponent.permanentAddressTextarea().should("be.enabled");
+        });
     })
 
 });

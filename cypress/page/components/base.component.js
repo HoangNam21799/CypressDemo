@@ -31,6 +31,15 @@ export default class BaseComponent {
         return this;
     }
 
+    clear(elementName) {
+        if (typeof this[elementName] !== "function") {
+            throw new Error(`Element "${elementName}" does not exist!`);
+        }
+
+        this[elementName]().clear();
+        return this;
+    }
+
     assertThat(assertion) {
         assertion();
         return this;

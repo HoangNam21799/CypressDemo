@@ -15,3 +15,11 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+
+beforeEach(() => {
+    cy.intercept("GET", "*", (req) => {
+        if (req.url.includes("google")) {
+            req.reply({ body: "" });
+        }
+    }).as("blockGoogleRequests");
+})

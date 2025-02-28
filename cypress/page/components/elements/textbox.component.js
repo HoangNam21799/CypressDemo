@@ -1,17 +1,17 @@
-import BaseComponent from "./base.component";
+import BaseComponent from "../base.component";
 
-export default class TextBoxComponent extends BaseComponent {
+export default class TextboxComponent extends BaseComponent {
 
     static getInstance() {
         if (!this.instance) {
-            this.instance = new TextBoxComponent();
+            this.instance = new TextboxComponent();
         }
 
         return this.instance;
     }
 
     isVisible() {
-        cy.url().should("include", "/text-box")
+        cy.url().should("include", "/text-box");
         this.body().contains("Text Box").should("be.visible");
         return this;
     }
@@ -25,4 +25,9 @@ export default class TextBoxComponent extends BaseComponent {
     permanentAddressLabel = () => cy.get("#permanentAddress-label");
     permanentAddressTextarea = () => cy.get("textarea#permanentAddress");
     submitBtn = () => cy.get("button#submit");
+    output = () => cy.get("#output")
+    outputName = () => this.output().find("#name");
+    outputEmail = () => this.output().find("#email");
+    outputCurrentAddress = () => this.output().find("#currentAddress");
+    outputPermanentAddress = () => this.output().find("#permanentAddress");
 }
