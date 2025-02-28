@@ -30,8 +30,8 @@ jobs:
           npx mochawesome-merge cypress/reports/*.json > cypress/reports/mochawesome.json
           npx mochawesome-report-generator cypress/reports/mochawesome.json -o cypress/reports/html
 
-      - name: Upload Test Report as Artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: cypress-report
-          path: cypress/reports/html
+          name: cypress-results
+          path: cypress/videos
