@@ -35,3 +35,9 @@ jobs:
         with:
           name: cypress-results
           path: cypress/videos
+          
+      - name: Cache Cypress results
+        uses: actions/cache@v3
+        with:
+          path: cypress/videos
+          key: ${{ runner.os }}-cypress-results-${{ github.sha }}
